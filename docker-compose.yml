@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  backend:
+    container_name: backend
+    build: .
+    ports:
+      - "3000:3000"
+    entrypoint: "npm run start:dev"
+    volumes:
+    - ./:/app/
+    - /app/node_modules     # Preventing override on node dependency
+    env_file:
+      - ./devops/app.env
+    restart: always
+
+networks:
+  default:
+    name: app_custom_network
+
+volumes:
+  app:
